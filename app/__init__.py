@@ -1,10 +1,10 @@
 from fastapi import FastAPI
-from .api.endpoint import bot_router
 
 
-def creat_app():
+def create_app():
+
     app = FastAPI()
 
-    app.include_router(bot_router)
+    # app.include_router()
 
     return app
