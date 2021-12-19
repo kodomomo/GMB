@@ -2,35 +2,70 @@ from abc import ABC, abstractmethod
 from fastapi import HTTPException, Request
 
 
-class ParserImpl:
+class Parser(ABC):
 
-    def parse(self, req: Request):
+    @abstractmethod
+    def parse(self, req: Request): pass
+
+
+class ParserImpl(Parser):
+
+    async def parse(self, req: Request):
         event_type = req.headers.get('X-GitHub-Event')
-        if self.__check_type_is_one_of_provide(event_type):
-            return self.__execute_method_by_type(event_type,req)
+        body = await req.json()
+        if self.__check_provide_type(event_type):
+            return self.__execute_method_by_type(event_type, body)
 
-    def __check_type_is_one_of_provide(self, type: str):
+    def __check_provide_type(self, type: str):
         provide_type = {
-            'issues': '',
-            'pull_request': '',
-            'ping': '',
-            'push': ''
+            'issues': True,
+            'pull_request': True,
+            'ping': True,
+            'push': True
         }
-        return provide_type.get(type) is not None
+        return type in provide_type
 
-    def __execute_method_by_type(self, type: str, req: Request):
+    def __execute_method_by_type(self, type: str, body: dict):
         provide_method_by_type = {
             'issues': self.__parse_issue,
-            'pull_request': self.__parser_pr,
-            'ping': self.__parser_ping,
-            'push': self.__parser_push
+            'pull_request': self.__parse_pr,
+            'ping': self.__parse_ping,
+            'push': self.__parse_push
         }
-        return provide_method_by_type[type](req)
+        return provide_method_by_type[type](body)
 
-    def __parse_issue(self, req: Request): pass
+    def __parse_ping(self, body: dict):
+        return self.__get_repo_name_url_private(body)
 
-    def __parser_pr(self, req: Request): pass
+    def __parse_push(self, body: dict):
+        return {
+            'repository': self.__get_repo_name_url_private(body),
+            'sender': body['sender']['login']
+        }
 
-    def __parser_ping(self, req: Request): pass
+    def __parse_issue(self, body: dict):
+        return {
+            'repository': self.__get_repo_name_url_private(body),
+            'event_sender': body['sender']['login'],
+            'issue_action': body['action'],
+            'issue_title': body['title'],
+            'issue_url': body['issue']['url'],
+        }
 
-    def __parser_push(self, req:Request): pass
+    def __parse_pr(self, body: dict):
+        return {
+            'repository': self.__get_repo_name_url_private(body),
+            'event_sender': body['sender']['login'],
+            'pr_action': body['action'],
+            'pr_title': body['title'],
+            'pr_url': body['url']
+        }
+
+    @staticmethod
+    def __get_repo_name_url_private(body: dict):
+        repo_full_name = body['repository']['full_name']
+        return {
+            'private': body['repository']['private'],
+            'full_name': repo_full_name,
+            'url': 'github.com/' + repo_full_name
+        }
