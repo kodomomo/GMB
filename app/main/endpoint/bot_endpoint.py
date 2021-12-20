@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Request
+from app.main.core import create_hatchling_bot
 
 bot_router = APIRouter()
 
 
 @bot_router.post('/bot')
-async def create_new_bot(): pass
-
+async def create_new_bot():
+    hatchling_bot = create_hatchling_bot()
 
 @bot_router.post('/bot/{name}')
 async def get_github_event(req: Request): pass

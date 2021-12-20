@@ -1,14 +1,10 @@
-from .part import create_parts
-from main_bot import Hatchling
+from util import create_gateway
+from .main_bot import MainBotImpl
 
 
-def create_hatchling_bot() -> Hatchling:
-    parts = create_parts()
+def create_commander(name: str, tier: str):
+    gate_way = create_gateway()
 
-    parser = parts['parser']
-    sender = parser['sender']
-    recoder = parts['recoder']
+    commander = MainBotImpl(name, tier, gate_way)
 
-    hatchling = Hatchling(parser, sender, recoder)
-
-    return hatchling
+    return commander

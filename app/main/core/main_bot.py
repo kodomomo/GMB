@@ -1,20 +1,10 @@
-from abc import ABC, abstractmethod
-from .part.webhook_parser import Parser
-from .part.message_sender import MessageSender
-from .part.recorder import Recoder
+from util.commander import Commander
 
 
-class Hatchling(ABC):
-    @abstractmethod
-    def __init__(self, parser: Parser, message_sender: MessageSender, recoder: Recoder): pass
+class MainBot:
 
-
-class HatchlingImpl(Hatchling):
-
-    def __init__(self, parser: Parser, message_sender: MessageSender, recoder: Recoder):
-        self.parser = parser
-        self.message_sender = message_sender
-        self.recoder = recoder
-
-
+    def __init__(self, name: str, tier: str, commander: Commander):
+        self.name = name
+        self.tier = tier
+        self.commander = commander
 

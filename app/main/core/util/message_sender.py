@@ -1,4 +1,4 @@
-from abc import ABC,abstractmethod
+from abc import ABC, abstractmethod
 import requests
 
 class MessageSender(ABC):
@@ -6,5 +6,6 @@ class MessageSender(ABC):
 
 
 class MessageSenderImpl(MessageSender):
-    pass
+
+    def send(self): pass
 
