@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
 
 
-class Hatchling(ABC):
+class Recoder(ABC):
     pass
 
 
-class HatchlingImpl(Hatchling):
-
+class RecoderImpl(Recoder):
     pass

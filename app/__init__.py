@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.endpoint.bot_endpoint import bot_router
+from app.main.api.endpoint.bot_endpoint import bot_router
 
 
 def create_app():

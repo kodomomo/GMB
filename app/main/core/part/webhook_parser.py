@@ -13,10 +13,12 @@ class ParserImpl(Parser):
     async def parse(self, req: Request):
         event_type = req.headers.get('X-GitHub-Event')
         body = await req.json()
-        if self.__check_provide_type(event_type):
-            return self.__execute_method_by_type(event_type, body)
+        if self.__check_provide_type(event_type) is False:
+            raise HTTPException(400, "None Provide Type")
+        return self.__execute_method_by_type(event_type, body)
 
-    def __check_provide_type(self, type: str):
+    @staticmethod
+    def __check_provide_type(type: str):
         provide_type = {
             'issues': True,
             'pull_request': True,
