@@ -1,19 +1,26 @@
-from abc import ABC, abstractmethod
-
-HOST = 'localhost'
-USER = 'root'
-PASSWORD = 'qwer1234'
-PORT = 3306
-CHARSET = 'utf8'
+from config import Config
+from abc import ABC  # abstractmethod
+import pymysql
+from pymysql.cursors import DictCursor
 
 
-class SqlExecuter(ABC):
-    pass
+class SqlExecuter(ABC): pass
 
 
 class SqlExecuterImpl(SqlExecuter):
-    def __init__(self):
-        import pymysql
-        self.db = pymysql.connect(host=HOST, user=USER, password=PASSWORD, port=PORT, charset=CHARSET)
-        self.cursor = self.db.cursor()
 
+    @staticmethod
+    def __get_db_and_cursor():
+        config = Config
+        __db = pymysql.connect(
+            host=config.HOST,
+            port=config.PORT,
+            charset=config.CHARSET,
+            user=config.USER,
+            password=config.PASSWORD
+        )
+        __cursor = __db.cursor(DictCursor)
+        return {
+            'db': __db,
+            'cursor': __cursor
+        }

@@ -8,6 +8,8 @@ class Commander(ABC):
     @abstractmethod
     def __init__(self, parser: Parser, message_sender: MessageSender, recoder: SqlExecuter): pass
 
+    @abstractmethod
+    def webhook(self): pass
 
 class CommanderImpl(Commander):
 
@@ -16,7 +18,7 @@ class CommanderImpl(Commander):
         self.message_sender = message_sender
         self.recoder = recoder
 
-    def webhook(self): pass
+    def webhook(self): pass #이걸로 트랜잭션 관리 하기 좋을 듯?
     # get commit amt and change tier
     # parser webhook data
     # save repo name and url
@@ -27,6 +29,7 @@ class CommanderImpl(Commander):
     # if commit_amt > 200 tier -> B
     # if commit_amt > 400 tier -> A
     # if commit_amt > 600 tier -> S
+    # else tier -> C
 
     def get_bot_information(self): pass
     # get bot information

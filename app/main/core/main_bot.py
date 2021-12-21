@@ -8,3 +8,9 @@ class MainBot:
         self.tier = tier
         self.commander = commander
 
+    # 웹훅이 들어올 경우의 함수 하나
+
+    def webhook_comes(self):
+        pass  # self.commander
+
+
