@@ -10,6 +10,13 @@ class Parser(ABC):
 
 class ParserImpl(Parser):
 
+    '''
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls,"_instance"):
+            cls._instance = super().__new__(cls)
+        return cls._instance
+    '''
+
     async def parse(self, req: Request):
         event_type = req.headers.get('X-GitHub-Event')
         body = await req.json()
