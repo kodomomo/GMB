@@ -21,25 +21,52 @@ class SqlExecuterImpl(SqlExecuter):
         )
         self.cursor = self.__db.cursor(DictCursor)
 
-    def insert_bot(self, bot_id: str, psid: str):
+    def show_bot_and_relation_repository(self, bot_id: str):
+        bot = self.__select_bot_by_bot_id(bot_id)
+        return {
+            'bot': bot,
+            'repository': self.__select_repository_by_repo_full_name(bot['repo_name'])
+        }
+
+    def create_bot(self, name: str, psid: str, repo_name: str):
         uuid = "unhex(replace(uuid(),'-',''))"
         self.cursor.execute(
-            f'insert into bot(id,name,created_at,psid) values({uuid},"{bot_id}",now(),"{psid}")'
+            f'insert into bot(id,name,created_at,psid,repo_name) values ({uuid},"{name}",now(),"{psid}","{repo_name}");'
         )
-        self.__db.commit()
 
-
-    def update_bot_repo_id(self, repo_id: str, bot_name: str, psid: str):
-        psid = self.add_double_quotation_mark(psid)
+    def create_repo(self, full_name: str, is_public: bytes, event_amt: int):
+        url = 'github.com/' + full_name
         self.cursor.execute(
-            f'UPDATE bot set repo_id="{repo_id}", where name="{bot_name}" and  psid="{psid}"'
+            f'insert into repository(id,url,is_public,event_amt) values("{full_name}","{url}",{is_public},{event_amt})'
         )
 
-    def insert_repository(self): pass
+    def update_repo_name(self, repo_name: str, bot_id: str):
+        self.cursor.execute(
+            f'UPDATE bot set repo_name="{repo_name}" where id={bot_id};'
+        )
 
-    def delete_bot_from_repo(self): pass
+    def update_repo_event_amt(self, repo_name: str, event_amt: int):
+        self.cursor.execute(
+            f'update repository set event_amt="{event_amt}" where id="{repo_name}";'
+        )
 
-    def delete_repo_from_bot(self): pass
+    def __select_bot_by_bot_id(self, bot_id: str):
+        bot = 'None Bot'
+        self.cursor.execute(
+            f'select * from bot where id={bot_id};'
+        )
+        bot = self.cursor.fetchone()
+        return bot
+
+    def __select_repository_by_repo_full_name(self, repo_name: str):
+        repository = 'None Repository'
+        if repo_name is not None:
+            self.cursor.execute(
+                f'select * from repository where id="{repo_name}";'
+            )
+            repository = self.cursor.fetchone()
+        return repository
+
 
 if __name__ == '__main__':
     a = SqlExecuterImpl(
@@ -50,4 +77,8 @@ if __name__ == '__main__':
         DbConfig.CHARSET
     )
 
-    a.insert_bot('sdf','asdf')
+    #a.create_bot('name', 'psid', 'repo_name')
+    #a.create_repo('repo_name', 1, 0)
+    #a.update_repo_name('dhdhdhdhdhdhdhd','0x9D4D2DD8667911ECA3F26A6BD7F64D9C')
+    #print(a.show_bot_and_relation_repository('0x787BEE8666EC11ECA3F26A6BD7F64D9C'))
+    a.update_repo_event_amt('repo_name',6000)
