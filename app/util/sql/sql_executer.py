@@ -90,5 +90,3 @@ class SqlExecuterImpl(SqlExecuter):
             f'select * from repository where name="{repo_name}"'
         )
         return self.__cursor.fetchone()
-
-
