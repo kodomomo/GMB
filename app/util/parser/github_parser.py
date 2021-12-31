@@ -58,7 +58,7 @@ class ParserImpl(Parser):
             'event_sender': body['sender']['login'],
             'issue_action': body['action'],
             'issue_title': body['title'],
-            'issue_url': body['issue']['url'],
+            'isue_url': body['issue']['url'],
         }
 
     def __parse_pr(self, body: dict):
