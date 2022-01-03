@@ -23,4 +23,3 @@ class Bot:
 
     def get_bot_id(self): return self.__bot_id
 
-

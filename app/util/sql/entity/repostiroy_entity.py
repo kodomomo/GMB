@@ -1,6 +1,3 @@
-from typing import Optional
-
-
 class Repository:
 
     def __init__(self, full_name: str, is_public: bool):
