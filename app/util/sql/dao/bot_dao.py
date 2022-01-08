@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
 
 import pymysql
 from config import DbConfig
@@ -6,11 +6,16 @@ from config import DbConfig
 from app.util.sql.entity.bot_entity import Bot
 
 
-class BotDAO(ABCMeta):
+class BotDAO(ABC):
 
-    def insert_new_bot(cls, bot: Bot): pass
+    @abstractmethod
+    def insert_new_bot(self, bot: Bot): pass
 
-    def update_repo_id_in_bot(cls, bot_id: str, repo_id: str): pass
+    @abstractmethod
+    def update_repo_id(self, bot_id: str, repo_id: str): pass
+
+    @abstractmethod
+    def select_repo_id(self, bot_id: str): pass
 
 
 class BotDAOImpl(BotDAO):
@@ -36,8 +41,15 @@ class BotDAOImpl(BotDAO):
             f'insert into bot(id,name,psid,repo_id) values(unhex(%s),%s,%s,%s)', (id, name, psid, repo_name)
         )
 
-    def update_repo_id_in_bot(self, bot_id: str, repo_id: str):
+    def update_repo_id(self, bot_id: str, repo_id: str):
         self.__cursor.execute(
             f'update bot set repo_id = "{repo_id}" where hex(id)="{bot_id}";'
         )
+
+    def select_repo_id(self, bot_id: str):
+        self.__cursor.execute(
+            f'select repo_id from bot where hex(id)="{bot_id}"'
+        )
+        repo_id = self.__cursor.fetchone()
+        return repo_id
 
