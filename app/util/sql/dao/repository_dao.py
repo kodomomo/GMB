@@ -6,10 +6,12 @@ from config import DbConfig
 from app.util.sql.entity.repostiroy_entity import Repository
 
 
-class RepositoryDAO(ABCMeta): pass
+class RepositoryDAO(ABCMeta):
+
+    def insert_repository(cls,repository: Repository): pass
 
 
-class RepositoryDAOImpl:
+class RepositoryDAOImpl(RepositoryDAO):
 
     def __init__(self, config: DbConfig):
         self.__db = pymysql.connect(
@@ -22,3 +24,21 @@ class RepositoryDAOImpl:
             autocommit=True,
         )
         self.__cursor = self.__db.cursor()
+
+    def insert_repository(self, repository: Repository):
+        name = repository.get_name()
+        url = repository.get_url()
+        is_public = repository.get_is_public()
+        self.__cursor.execute(
+            f'insert into repository(id,url,is_public) values("{name}","{url}",{is_public})'
+        )
+
+    def update_is_public(self,is_public: bool,repo_id: str):
+        self.__cursor.execute(
+            f'update repository set is_public={is_public} where id="{repo_id}";'
+        )
+
+    def increase_1_about_event_amt(self,repo_id: str):
+        self.__cursor.execute(
+            f'update repository set event_amt=1 + event_amt where id="{repo_id}"'
+        )

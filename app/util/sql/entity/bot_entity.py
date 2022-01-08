@@ -7,7 +7,7 @@ class Bot:
     def __init__(self, name: str, psid: str):
         self.__name = name
         self.__psid = psid
-        self.__bot_id = uuid.uuid4()
+        self.__bot_id = str(uuid.uuid4()).replace('-','')
         self.__created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.__repo_name = None
 
