@@ -1,3 +1,5 @@
+from abc import ABC,abstractmethod
+
 from uvicorn import run
 from app import create_app
 

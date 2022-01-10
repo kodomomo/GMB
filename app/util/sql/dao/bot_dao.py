@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 import pymysql
+from pymysql.cursors import DictCursor
 from config import DbConfig
 
 from app.util.sql.entity.bot_entity import Bot
@@ -30,7 +31,7 @@ class BotDAOImpl(BotDAO):
             database='kodomo_dragon',
             autocommit=True,
         )
-        self.__cursor = self.__db.cursor()
+        self.__cursor = self.__db.cursor(DictCursor)
 
     def insert_new_bot(self, bot: Bot):
         id = bot.get_bot_id()
