@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from external_api.github.webhook_api import github_router
+from external_api.github_api import github_router
 from core.controller.url_controller import url_router
 
 def create_app():
