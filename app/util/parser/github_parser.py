@@ -1,56 +1,55 @@
 from abc import ABC, abstractmethod
+
 from fastapi import HTTPException, Request
 
 
 class GitParser(ABC):
 
     @abstractmethod
-    def parse_ping(self, body: dict): pass
-
-    @abstractmethod
-    def parse_push(self, body: dict): pass
-
-    @abstractmethod
-    def parse_issue(self, body: dict): pass
-
-    @abstractmethod
-    def parse_pr(self,body: dict): pass
+    def parse(self, event_type: str, body: dict) -> dict: pass
 
 
 class GitParserImpl(GitParser):
 
-    def parse_ping(self, body: dict):
-        return self.__get_repo_name_url_private(body)
-
-    def parse_push(self, body: dict):
-        return {
-            'repository': self.__get_repo_name_url_private(body),
-            'sender': body['sender']['login']
+    def parse(self, event_type: str, body: dict):
+        operate_parse_type = {
+            'issue': self.__parse_issue,
+            'pull_request': self.__parse_pr
         }
-
-    def parse_issue(self, body: dict):
-        return {
-            'repository': self.__get_repo_name_url_private(body),
-            'event_sender': body['sender']['login'],
-            'issue_action': body['action'],
-            'issue_title': body['title'],
-            'issue_url': body['issue']['url'],
-        }
-
-    def parse_pr(self, body: dict):
-        return {
-            'repository': self.__get_repo_name_url_private(body),
-            'event_sender': body['sender']['login'],
-            'pr_action': body['action'],
-            'pr_title': body['title'],
-            'pr_url': body['url']
-        }
+        try:
+            return operate_parse_type[event_type](body)
+        except KeyError:
+            return {
+                'repository' : self.__parse_about_repository(body)
+            }
 
     @staticmethod
-    def __get_repo_name_url_private(body: dict):
+    def __parse_about_repository(body: dict):
         repo_full_name = body['repository']['full_name']
         return {
-            'is_public': body['repository']['private'],
-            'full_name': repo_full_name,
-            'url': 'github.com/' + repo_full_name
+            'name': repo_full_name,
+            'url': 'github.com/' + repo_full_name,
+            'private': body['repository']['private'],
+        }
+
+    def __parse_issue(self, body: dict):
+        return {
+            'sender': body['sender']['login'],
+            'repository': self.__parse_about_repository(body),
+            'issue': {
+                'action': body['action'],
+                'title': body['issue']['title'],
+                'url': body['issue']['html_url'],
+            }
+        }
+
+    def __parse_pr(self, body: dict):
+        return {
+            'sender': body['sender']['login'],
+            'repository': self.__parse_about_repository(body),
+            'pr': {
+                'action': body['action'],
+                'title': body['title'],
+                'url': body['html_url']
+            }
         }

@@ -1,31 +1,17 @@
-from abc import ABC, abstractmethod
-
 import pymysql
 from pymysql.cursors import DictCursor
 from config import DbConfig
 
-from app.util.sql.entity.repostiroy_entity import Repository
+from app.util.sql.entity.repository import Repository
 
 
-class RepositoryDAO(ABC):
 
-    @abstractmethod
-    def insert_repository(self, repository: Repository): pass
+def create_repositoryDAO():
 
-    @abstractmethod
-    def update_is_public(self, repo_id: str, is_public: bool): pass
-
-    @abstractmethod
-    def increase_1_about_event_amt(self, repo_id: str): pass
-
-    @abstractmethod
-    def update_repo_id_and_url(self, repo_id: str): pass
-
-    @abstractmethod
-    def select_is_public(self, repo_id: str): pass
+    repository_dao_impl = RepositoryDAOImpl()
 
 
-class RepositoryDAOImpl(RepositoryDAO):
+class RepositoryDAOImpl:
 
     def __init__(self, config: DbConfig):
         self.__db = pymysql.connect(
@@ -34,39 +20,45 @@ class RepositoryDAOImpl(RepositoryDAO):
             user=config.USER,
             password=config.PASSWORD,
             charset=config.CHARSET,
-            database='kodomo_dragon',
+            database='gmb',
             autocommit=True,
         )
         self.__cursor = self.__db.cursor(DictCursor)
 
-    def insert_repository(self, repository: Repository):
-        name = repository.get_name()
-        url = repository.get_url()
-        is_public = repository.get_is_public()
+    def new_repository(self,repository: Repository):
         self.__cursor.execute(
-            f'insert into repository(id,url,is_public) values("{name}","{url}",{is_public});'
+            f'insert into repository values("{repository.get_name()}","{repository.get_url()}","{int(repository.is_public())}", 0);'
         )
 
-    def update_is_public(self, is_public: bool, repo_id: str):
+
+    def increase_event_amt(self,name):
         self.__cursor.execute(
-            f'update repository set is_public={is_public} where id="{repo_id}";'
+            f'select event_amt + 1 as amt from repository where name="{name}"'
+        )
+        amt = self.__cursor.fetchone()
+        self.__cursor.execute(
+            f'update repository set event_amt={amt["amt"]} where name="{name}"'
+        )
+        #서브 쿼리로 나중에 바꿔주기
+
+    def reverse_public(self,name):
+        self.__cursor.execute(
+            f'select private from repository where name="{name}"'
+        )
+        reversed_bool = False if self.__cursor.fetchone().get('private') else True
+        self.__cursor.execute(
+            f'update repository set private={reversed_bool} where name="{name}"'
         )
 
-    def increase_1_about_event_amt(self, repo_id: str):
+    def find_repository_by_name(self,repository_name: str):
         self.__cursor.execute(
-            f'update repository set event_amt=1 + event_amt where id="{repo_id}";'
+            f'select * from repository where name="{repository_name}"'
         )
+    #TODO 이름 수정 & URL 수정 & 삭제
 
-    def update_repo_id_and_url(self, repo_id: str):
-        self.__cursor.execute(
-            f'update repository'
-            f' set id="{repo_id}, url="{"github.com/" + repo_id}"'
-            f'" where id="{repo_id}";'
-        )
 
-    def select_is_public(self, repo_id: str):
-        self.__cursor.execute(
-            f'select is_public from repository where id="{repo_id}";'
-        )
-        is_public = self.__cursor.fetchone()
-        return is_public
+if __name__ == '__main__':
+    dbconfig = DbConfig()
+    rep = RepositoryDAOImpl(dbconfig)
+
+    print(rep.reverse_public('name'))
