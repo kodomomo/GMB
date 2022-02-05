@@ -15,21 +15,27 @@ class GithubServiceImpl:
         self.__repo_dao = repo_dao
 
     def execute(self, request: Request):
-        parsed_request = self.__parse_event(request)
-        self.check_differences(parsed_request['repository']['name'])
-        self.__repo_dao.increase_event_amt(parsed_request['repository']['name'])
-        if parsed_request.get('sender') is not None: self.send_fm()
+        parsed_request = self.__parse_request(request)
+        repository = parsed_request['repository']['name']
 
-    async def __parse_event(self, request: Request) -> dict:
+        self.__check_repository_is_valid(repository)
+
+        self.__apply_repository_changes(repository)
+
+        if parsed_request['should_notify']: self.__notify_by_messenger()
+
+    async def __parse_request(self, request: Request):
         event_type = request.headers.get('X-GitHub-Event')
-        return self.__git_parser.parse(event_type, await request.json())
+        body = await request.json()
+        return self.__git_parser.parse(event_type, body)
 
-    def check_differences(self,repository_name: str):
-        if self.__repo_dao.find_repository_by_name(repository_name) is None: raise HTTPException(400,'NONE REGISTERED REPOSITORY')
+    def __check_repository_is_valid(self, name: str):
+        if self.__repo_dao.find_repository_by_name(name) is None:
+            raise HTTPException(400, 'CHECK REPOSITORY HAS REGISTER TO BOT')
+            # 나중에 페메를 통해 URL에서 수정할 수 있도록 알려줘야 함
+
+    def __apply_repository_changes(self, name: str):
+        self.__repo_dao.increase_event_amt(name)
+
+    def __notify_by_messenger(self):
         pass
-
-    def send_fm(self):
-        notify_event_type = {
-            'issue': True,
-            'pull_request': True
-        }

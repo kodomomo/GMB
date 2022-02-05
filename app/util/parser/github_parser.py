@@ -20,6 +20,7 @@ class GitParserImpl(GitParser):
             return operate_parse_type[event_type](body)
         except KeyError:
             return {
+                'should_notify': False,
                 'repository' : self.__parse_about_repository(body)
             }
 
@@ -34,6 +35,7 @@ class GitParserImpl(GitParser):
 
     def __parse_issue(self, body: dict):
         return {
+            'should_notify': True,
             'sender': body['sender']['login'],
             'repository': self.__parse_about_repository(body),
             'issue': {
@@ -45,6 +47,7 @@ class GitParserImpl(GitParser):
 
     def __parse_pr(self, body: dict):
         return {
+            'should_notify': True,
             'sender': body['sender']['login'],
             'repository': self.__parse_about_repository(body),
             'pr': {
