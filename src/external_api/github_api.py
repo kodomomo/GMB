@@ -1,10 +1,5 @@
-from fastapi import APIRouter
+from ..external_api import create_api_router
 
-
-def create_github_router():
-    return APIRouter()
-
-
-github_router = create_github_router()
+github_router = create_api_router('github')
 
 
