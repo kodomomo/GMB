@@ -1,4 +1,6 @@
-from ..external_api import create_api_router
+from fastapi import APIRouter
 
-messenger_router = create_api_router('messenger')
+messenger_router = APIRouter(
+    prefix='/messenger'
+)
 

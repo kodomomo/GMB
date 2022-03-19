@@ -1,5 +1,12 @@
-from ..external_api import create_api_router
+from fastapi import Request, APIRouter
 
-github_router = create_api_router('github')
+github_router = APIRouter(
+    prefix='/github'
+)
 
+
+@github_router.post('/{bot_id}')
+def aa(request: Request):
+
+    print(request)
 
