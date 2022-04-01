@@ -1,15 +1,12 @@
-from flask import Flask
+from fastapi import FastAPI
+
+from .external_api.github import github_router
 
 
-def register_bp(app: Flask):
-    from .external_api.github import github_bp
+def create_app():
+    app = FastAPI()
 
-    app.register_blueprint(github_bp)
-
-
-def create_app() -> Flask:
-    app = Flask("Kodomo-Dragon")
-
-    register_bp(app)
+    app.include_router(github_router)
 
     return app
+
