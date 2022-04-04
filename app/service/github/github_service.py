@@ -1,7 +1,7 @@
 from ...util.parser.github_parser import GithubParser
 
 
-class GithubServiceImpl:
+class GithubService:
 
     @staticmethod
     def when_ping(bot_id: str, body: dict) -> dict:
