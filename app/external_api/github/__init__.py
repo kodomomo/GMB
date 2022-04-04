@@ -12,7 +12,4 @@ async def get_webhook_by_each_bot(bot_id: str, request: Request) -> Request:
     type = request.headers.get('X-GitHub-Event')
     body = await request.json()
 
-    print(bot_id)
-    print(type)
-
     return act_service_by_type[type](bot_id, body)
