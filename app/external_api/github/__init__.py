@@ -8,7 +8,7 @@ github_router = APIRouter(
 
 
 @github_router.post('/{bot_id}')
-async def get_webhook_by_each_bot(bot_id: str, request: Request) -> Request:
+async def get_webhook_by_each_bot(bot_id: str, request: Request):
     type = request.headers.get('X-GitHub-Event')
     body = await request.json()
 
