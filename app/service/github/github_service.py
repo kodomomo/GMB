@@ -1,14 +1,7 @@
-from ...util.parser.github_parser import GithubParser
-
-from ...util.db.model.repository import Repository
-
-from ...util.db import get_session
-
-from ...util.db.decorater.db_decorater import create_new_bot
+from ...util.db.decorater.db_decorater import create_new_bot, update_event_amount
 
 
 class GithubService:
-
     """
         TODO
         이중 데코레이터의 동작 순서 알아보기
@@ -16,6 +9,8 @@ class GithubService:
 
     @staticmethod
     @create_new_bot
+    # @add_repository_for_each_user
+    # @notice_by_messenger
     def when_ping(bot_id: str, body: dict) -> dict:
 
         """
@@ -27,9 +22,24 @@ class GithubService:
         return body
 
     @staticmethod
+    @update_event_amount
+    # @notice_by_messenger
     def when_issue(bot_id: str, body: dict) -> dict:
-        return GithubParser.parse_issues(body)
+
+        """
+            TODO
+            페메 보내는 로직을 데코레이터로 만들어야 함 -- pr의 경우도 마찬가지
+        """
+
+        return body
 
     @staticmethod
+    @update_event_amount
+    # @notice_by_messenger
     def when_pr(bot_id: str, body: dict) -> dict:
-        return GithubParser.parse_pr(body)
+
+        """
+            TODO
+
+        """
+        return body
