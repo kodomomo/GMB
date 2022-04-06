@@ -4,20 +4,25 @@ from ...util.db.model.repository import Repository
 
 from ...util.db import get_session
 
+from ...util.db.decorater.db_decorater import create_new_bot
+
 
 class GithubService:
 
-    @staticmethod
-    def when_ping(bot_id: str, body: dict) -> dict:
-        session = get_session()
-        repo_name = GithubParser.get_repository_name(body)
+    """
+        TODO
+        이중 데코레이터의 동작 순서 알아보기
+    """
 
-        try:
-            session.add(Repository(repo_name['name']))
-            session.commit()
-        except:
-            print('rollback\n\n\n\n\n\n')
-            session.rollback()
+    @staticmethod
+    @create_new_bot
+    def when_ping(bot_id: str, body: dict) -> dict:
+
+        """
+            TODO
+            bot_id를 통해서 user 테이블에 repository 추가해줌.
+            bot_id로 찾아낸 user 튜플들에 페메를 발송함.
+        """
 
         return body
 
