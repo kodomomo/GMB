@@ -24,15 +24,17 @@ def create_new_bot(func):
 
 
 def update_event_amount(func):
+    session = get_session()
+
     def wrapper(bot_id: str, body: dict):
-        session = get_session()
         parsed_issue = GithubParser.parse_issues(body)
         repo_name = parsed_issue['repo_name']
 
         try:
-            pass
+            session.query(Repository).filter(Repository.repo_name == repo_name).update({'event_amt': Repository.event_amt + 1})
+            session.commit()
         except:
-            pass
+            session.rollback()
 
         return func(bot_id, parsed_issue)
 

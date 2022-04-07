@@ -18,4 +18,3 @@ async def get_webhook_by_each_bot(bot_id: str, request: Request):
 
     except KeyError:
         return 'None Provide Type'
-
