@@ -17,10 +17,6 @@ class GithubService:
 
     @staticmethod
     @update_event_amount
-    def when_push(bot_id, type: str, body: dict) -> dict: return body
-
-    @staticmethod
-    @update_event_amount
     def when_issue(bot_id: str, type: str, body: dict) -> dict: return body
 
     @staticmethod
