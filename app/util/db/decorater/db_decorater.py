@@ -13,7 +13,7 @@ def create_new_bot(func):
         repo_name = parsed_by_type[type](body)
 
         try:
-            session.add(Repository(repo_name['repo_name']))
+            session.add(Repository(repo_name['name']))
             session.commit()
         except:
             session.rollback()
@@ -32,7 +32,8 @@ def update_event_amount(func):
 
         try:
             session.query(Repository).filter(Repository.repo_name == repo_name).update(
-                {'event_amt': Repository.event_amt + 1})
+                {'event_amt': Repository.event_amt + 1}
+            )
             session.commit()
         except:
             session.rollback()
