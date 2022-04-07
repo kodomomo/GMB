@@ -27,7 +27,7 @@ def update_event_amount(func):
     session = get_session()
 
     def wrapper(bot_id: str, type: str, body: dict):
-        parsed_body = parsed_by_type['push'](body)
+        parsed_body = parsed_by_type[type](body)
         try:
             session.query(Repository).filter(Repository.repo_name == parsed_body['repo_name']).update(
                 {'event_amt': Repository.event_amt + 1}
