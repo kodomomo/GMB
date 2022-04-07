@@ -25,7 +25,6 @@ class GithubService:
     @update_event_amount
     # @notice_by_messenger
     def when_issue(bot_id: str, body: dict) -> dict:
-
         """
             TODO
             페메 보내는 로직을 데코레이터로 만들어야 함 -- pr의 경우도 마찬가지
@@ -37,7 +36,6 @@ class GithubService:
     @update_event_amount
     # @notice_by_messenger
     def when_pr(bot_id: str, body: dict) -> dict:
-
         """
             TODO
 

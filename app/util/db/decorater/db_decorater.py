@@ -9,7 +9,6 @@ from ..model.repository import Repository
 
 def create_new_bot(func):
     def wrapper(bot_id: str, body: dict):
-
         session = get_session()
         repo_name = GithubParser.get_repository_name(body)
 
@@ -19,7 +18,7 @@ def create_new_bot(func):
         except:
             session.rollback()
 
-        func(bot_id, body)
+        return func(bot_id, body)
 
     return wrapper
 
@@ -35,6 +34,6 @@ def update_event_amount(func):
         except:
             pass
 
-        func(bot_id, body)
+        return func(bot_id, parsed_issue)
 
     return wrapper
