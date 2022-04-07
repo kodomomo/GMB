@@ -13,7 +13,7 @@ async def get_webhook_by_each_bot(bot_id: str, request: Request):
         type = request.headers.get('X-GitHub-Event')
         body = await request.json()
 
-        return act_service_by_type[type](bot_id, body)
+        return act_service_by_type[type](bot_id, type, body)
 
     except KeyError:
         return 'None Provide Type'

@@ -3,7 +3,7 @@ class GithubParser:
     @staticmethod
     def get_repository_name(request: dict):
         return {
-            'name': request['repository']['full_name']
+            'repo_name': request['repository']['full_name']
         }
 
     @staticmethod
