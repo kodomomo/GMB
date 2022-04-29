@@ -56,4 +56,3 @@ def increase_event_amount(func):
         return func(bot_id, type, body)
 
     return wrapper
-# send_messenger(func):

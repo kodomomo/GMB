@@ -11,7 +11,7 @@ class User(Base):
     __tablename__ = 'user'
 
     psid = Column(VARCHAR(250), primary_key=True)
-    bot_id = Column(VARCHAR(250), nullable=False, default=uuid4())
+    bot_id = Column(VARCHAR(250), nullable=False, default=uuid4(),primary_key=True)
     repo_name = Column(VARCHAR(150), ForeignKey('repository.repo_name'), nullable=True)
     registered_at = Column(DATETIME, nullable=False)
 

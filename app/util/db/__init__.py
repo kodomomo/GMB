@@ -1,9 +1,11 @@
+import os
+
 from sqlalchemy import create_engine
 
 from sqlalchemy.orm import sessionmaker, scoped_session
 
 __engine = create_engine(
-    'mysql+pymysql://root:qwer1234@localhost:3306/gmb'
+    os.environ['DATABASE_URI']
 )
 
 __Session = scoped_session(sessionmaker(bind=__engine, autocommit=False, autoflush=False))
