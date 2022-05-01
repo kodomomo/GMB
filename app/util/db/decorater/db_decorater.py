@@ -1,4 +1,4 @@
-from ...db import get_session
+from ...db import get_session, close_session
 
 from ...parser import parsed_by_type
 
@@ -15,8 +15,11 @@ def create_bot(func):
         try:
             session.add(new_repo)
             session.commit()
-        except:
-            session.rollback()
+
+        except: session.rollback()
+
+        finally: close_session(session)
+
         return func(bot_id, type, body)
 
     return wrapper
@@ -35,6 +38,8 @@ def assign_bot(func):
 
         except: session.rollback()
 
+        finally: close_session(session)
+
         return func(bot_id, type, body)
 
     return wrapper
@@ -52,6 +57,8 @@ def increase_event_amount(func):
             session.commit()
 
         except: session.rollback()
+
+        finally: close_session(session)
 
         return func(bot_id, type, body)
 

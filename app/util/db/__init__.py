@@ -4,14 +4,13 @@ from sqlalchemy import create_engine
 
 from sqlalchemy.orm import sessionmaker, scoped_session
 
-__engine = create_engine(
-    os.environ['DATABASE_URI']
-)
 
-__Session = scoped_session(sessionmaker(bind=__engine, autocommit=False, autoflush=False))
-
-__session = __Session()
+class __ORM_PART:
+    __ENGINE = create_engine(os.environ['DATABASE_URI'])
+    SESSION = scoped_session(sessionmaker(bind=__ENGINE, autocommit=False, autoflush=False))
 
 
-def get_session():
-    return __session
+def get_session(): return __ORM_PART.SESSION()
+
+
+def close_session(session: __ORM_PART.SESSION): session.close()
