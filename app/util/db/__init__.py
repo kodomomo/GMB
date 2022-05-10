@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 
 
 class __ORM_PART:
-    __ENGINE = create_engine('DATABASE_URI')  # mysql+pymysql://root:qwer1234@localhost:3306/gmb
+    __ENGINE = create_engine(os.environ['DATABASE_URI'])  # #mysql+pymysql://root:qwer1234@localhost:3306/gmb
     SESSION = scoped_session(sessionmaker(bind=__ENGINE, autocommit=False, autoflush=False))
 
 
