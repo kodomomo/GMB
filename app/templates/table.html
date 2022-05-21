@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <title>Item Details</title>
+</head>
+<body>
+<h2>GMB</h2>
+
+<table border="1" width="600px">
+    <thread>
+        <tr>
+            <th>name</th>
+            <th>url</th>
+            <th>event_amt</th>
+        </tr>
+    </thread>
+    {% for repository in repo_list %}
+
+        <tr>
+            <td>
+                {{ repository.repo_name }}
+            </td>
+            <td>
+                <a href={{ 'https://'+repository.url }}>{{ repository.url }}</a>
+            </td>
+            <td>
+                {{ repository.event_amt }}
+            </td>
+        </tr>
+
+    {% endfor %}
+
+</table>
+</body>
+</html>
