@@ -18,9 +18,14 @@ class GithubService:
     @staticmethod
     @assign_bot
     @increase_event_amount
-    def when_issue(bot_id: str, type: str, body: dict) -> dict: return body
+    def when_issue(bot_id: str, type: str, body: dict): pass
 
     @staticmethod
     @assign_bot
     @increase_event_amount
-    def when_pr(bot_id: str, type: str, body: dict) -> dict: return body
+    def when_pr(bot_id: str, type: str, body: dict): pass
+
+    @staticmethod
+    @assign_bot
+    @increase_event_amount
+    def when_push(bot_id: str, type: str, body: dict): pass
