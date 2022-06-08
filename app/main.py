@@ -1,3 +1,5 @@
+import os
+
 from app import create_app
 
 from app.service.our import our_service
@@ -7,7 +9,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
 app = create_app()
-templates = Jinja2Templates(directory="/Volumes/Tools/Project/Python/Kodomo-Dragon/app/templates")
+templates = Jinja2Templates(directory=os.getcwd() + '/templates')
 
 
 @app.get('/', response_class=HTMLResponse)
