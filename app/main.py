@@ -2,7 +2,7 @@ import os
 
 from app import create_app
 
-from app.service.our import our_service
+from app.service.our.our_service import OurService
 
 from fastapi.requests import Request
 from fastapi.responses import HTMLResponse
@@ -16,5 +16,5 @@ templates = Jinja2Templates(directory=os.getcwd() + '/templates')
 def show_repository_lank(request: Request):
     return templates.TemplateResponse('table.html', context={
         'request': request,
-        'repo_list': our_service['show_rank']()
+        'repo_list': OurService.show_rank()
     })
