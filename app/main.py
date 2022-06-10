@@ -9,7 +9,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
 app = create_app()
-templates = Jinja2Templates(directory=os.getcwd() + '/templates')
+templates = Jinja2Templates(directory=os.getcwd() + '/app/templates')
 
 
 @app.get('/', response_class=HTMLResponse)
