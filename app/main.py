@@ -12,7 +12,7 @@ app = create_app()
 templates = Jinja2Templates(directory=os.getcwd() + '/app/templates')
 
 
-@app.get('/', response_class=HTMLResponse)
+@app.get('/rank', response_class=HTMLResponse)
 def show_repository_lank(request: Request):
     return templates.TemplateResponse('table.html', context={
         'request': request,
