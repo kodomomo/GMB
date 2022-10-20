@@ -1,0 +1,16 @@
+name: send_messanger
+
+on: [push, pull_request]
+
+jobs:
+
+  call_api:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: GMB-call
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'localhost:8000/test'
+          method: 'GET'
