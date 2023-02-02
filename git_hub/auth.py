@@ -31,7 +31,34 @@ headers = {
 response = get(url=url, headers=headers)
 
 from pprint import pprint
-pprint(response.json())
+
+# pprint(response.json())
+
+# https://api.github.com/app/installations/:installation_id/access_tokens
+
+required_list = map(lambda x: {
+    'url': x['access_tokens_url'],
+    'permissions': x['permissions'],
+
+}, get(
+    headers={
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {jwt_}"
+    },
+    url='https://api.github.com/app/installations'
+).json()
+                    )
+
+
+for obj in required_list:
+    print(post(
+        url=obj['url'],
+        headers={
+            'Authorization': f'Bearer {get_app_jwt()}',
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28"
+        }
+    ).json())
 
 if __name__ == '__main__':
     pass
