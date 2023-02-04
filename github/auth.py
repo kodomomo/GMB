@@ -2,7 +2,7 @@ from jwt import encode
 from time import time
 from requests import post, get
 
-from git_hub.config import PEM_CONTENT, GITHUB_APP_ID
+from github.config import PEM_CONTENT, GITHUB_APP_ID
 
 
 def get_app_jwt():
@@ -61,29 +61,27 @@ for obj in required_list:
 
 pprint(user_list)
 
-pprint(
-    post(
-        url='https://api.github.com/repos/Kodomomo/GMB/hooks',
-        headers={
-            'Accept': 'application/vnd.github+json',
-            'Authorization': f'Bearer {user_list["kodomomo"]["token"]}',
-            'X-GitHub-Api-Version': '2022-11-28'
-        },
-        json={
-            "name": "web",
-            "active": True,
-            "events": [
-                "ping",
-                "push",
-                "pull_request"
-                ""
-            ],
-            "config": {
-                "url": "https://ff8c-211-36-142-138.jp.ngrok.io/test",
-                "content_type": "json"
-            }
+a = post(
+    url='https://api.github.com/repos/osangu/Algorithm/hooks',
+    headers={
+        'Accept': 'application/vnd.github+json',
+        'Authorization': f'Bearer {user_list["osangu"]["token"]}',
+        'X-GitHub-Api-Version': '2022-11-28'
+    },
+    json={
+        "name": "web",
+        "active": True,
+        "events": [
+            "ping",
+            "push",
+            "pull_request"
+            ""
+        ],
+        "config": {
+            "url": "https://ff8c-211-36-142-138.jp.ngrok.io/test",
+            "content_type": "json"
         }
-    ).json()
+    }
 )
 
 if __name__ == '__main__':
