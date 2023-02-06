@@ -14,4 +14,4 @@ def _pem_file_content():
 # Github APP
 PEM_CONTENT = _pem_file_content()
 GITHUB_APP_ID = int(os.environ['GITHUB_APP_ID'])
-
+ALGORITHM = 'RS256'
