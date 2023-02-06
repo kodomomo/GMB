@@ -16,4 +16,3 @@ for obj in required_list:
         }
     ).json()
 
-pprint(user_list)
