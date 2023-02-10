@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.core.messenger.api import messenger_router
+from app.core.messenger.api.webhook import messenger_router
 
 
 def include_messenger_router(app: FastAPI):
