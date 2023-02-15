@@ -1,7 +1,7 @@
 from app.core.messenger.api.payload import MessagePayload
 
 
-def message_payload_to_message(payload: MessagePayload):
+def payload_to_message(payload: MessagePayload):
     entry = payload.entry[0]['messaging'][0]
 
     return {
