@@ -1,4 +1,4 @@
-from uuid import UUID
+from uuid import UUID, uuid4
 from typing import Optional, List
 from datetime import datetime
 
@@ -31,17 +31,20 @@ class WebhookUser(dict):
     GITHUB_ID = 'githubId'
     GITHUB_NAME = 'githubName'
     RECEIPT_ID = 'receiptId'
+    SENDER_ID = 'senderId'
 
     def __init__(
             self,
             github_id: str,
             github_name: str,
-            receipt_id: str
+            receipt_id: str,
+            sender_id: str
     ):
         super().__init__(
             github_id=github_id,
             github_name=github_name,
-            receipt_id=receipt_id
+            receipt_id=receipt_id,
+            sender_id=sender_id
         )
 
 
@@ -52,7 +55,14 @@ class PendingWebhook(dict):
     RECEIPT_ID = 'receiptId'
     CREATED_AT = 'createdAt'
 
-    def __init__(self, id_: UUID, secret: str, sender_id: str, receipt_id: str, created_at: Optional[datetime] = utc_now()):
+    def __init__(
+            self,
+            secret: str,
+            sender_id: str,
+            receipt_id: str,
+            id_: Optional[UUID] = uuid4(),
+            created_at: Optional[datetime] = utc_now()  # ttl works when date type is utc
+    ):
         super().__init__(
             _id=str(id_),
             secret=secret,
@@ -71,11 +81,11 @@ class Webhook(dict):
 
     def __init__(
             self,
-            id_: UUID,
             secret: str,
             user: WebhookUser,
-            created_at: Optional[datetime] = ktc_now(),
+            id_: Optional[UUID] = uuid4(),
             event_amt: Optional[int] = 0,
+            created_at: Optional[datetime] = ktc_now(),
     ):
         super().__init__(
             _id=str(id_),
