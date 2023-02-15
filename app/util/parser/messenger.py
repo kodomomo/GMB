@@ -1,4 +1,4 @@
-from app.core.messenger.api import MessagePayload
+from app.core.messenger.api.payload import MessagePayload
 from app.util.time import timestamp_to_datetime
 
 
