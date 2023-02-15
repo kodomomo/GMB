@@ -23,5 +23,5 @@ def initialize_pending_hook(message: MessagePayload):
             webhook_id=uuid4(),
             secret=parsed_message['secret']
         ),
-        recipient_id=parsed_message['receipt']
+        recipient_id=parsed_message['sender']
     )
