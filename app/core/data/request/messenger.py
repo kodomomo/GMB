@@ -20,3 +20,11 @@ def send_message(
             f"tag={tag}",
         headers={"Content-Type": "application/json"},
     )
+
+    
+PENDING_MESSAGE = '1️⃣ 해당 Repository > Settings > Webhooks > Add Webhoook\n' \
+                  '2️⃣ Payload URL : https://3e08-168-188-234-72.jp.ngrok.io/{webhook_id}\n' \
+                  '3️⃣ Content type : application/json \n' \
+                  '4️⃣ Secret : {secret}\n\n' \
+                  '⚠️ 보안을 위해 Secret을 설정해주세요.\n' \
+                  '⛔️ Content type != json 일 경우 작동하지 않습니다.'
