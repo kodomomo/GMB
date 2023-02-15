@@ -1,7 +1,7 @@
 from typing import List
 
 from pymongo import MongoClient, ASCENDING, IndexModel
-from pymongo.database import Database
+from pymongo.database import Database, Collection
 from pymongo.errors import CollectionInvalid
 # from pymongo.typings import _DocumentType as DocumentType
 
@@ -23,6 +23,10 @@ def get_mongo_db(host: str, port: int, database: str) -> Database:
     # 익셉션 처리가 아니라, 새로운 db에서 작동하게 해야할까? TODO
 
     return mongodb if len(mongodb.list_collection_names()) != 0 else throw(DatabaseNotFoundException)
+
+
+def get_collection(collection_name: str) -> Collection:
+    return mongo.get_collection(collection_name)
 
 
 def initialize_collections(db: Database, collection_names: List[str]):
