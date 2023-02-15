@@ -50,7 +50,7 @@ def create_index(db: Database, collection_name: str, document_name: str, ttl_sec
 
 def init_mongo():
     initialize_collections(mongo, CollectionNames.NAME_LIST)
-    set_ttl(mongo, CollectionNames.PENDING_WEBHOOK, PendingWebhook.CREATED_AT, 1)
+    set_ttl(mongo, CollectionNames.PENDING_WEBHOOK, PendingWebhook.CREATED_AT, 60 * 10)
 
 
 mongo = get_mongo_db(
