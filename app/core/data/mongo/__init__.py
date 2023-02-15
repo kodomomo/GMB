@@ -43,9 +43,9 @@ def set_ttl(db: Database, collection_name: str, document_name: str, ttl_sec: int
 
 def create_index(db: Database, collection_name: str, document_name: str, ttl_sec: int):  # TODO
     collection = db.get_collection(collection_name)
-    index = IndexModel([(document_name, ASCENDING)], expireAfterSeconds=ttl_sec)
-
-    collection.create_indexes([index])
+    collection.create_index(
+        [(document_name, ASCENDING)], expireAfterSeconds=ttl_sec
+    )
 
 
 def init_mongo():
