@@ -8,5 +8,4 @@ def payload_to_message(payload: MessagePayload):
     return {
         'secret': message if (message := entry['message'].get('text')) is not None else generate_random_secret(),
         'sender': entry['sender']['id'],
-        'receipt': entry['recipient']['id'],
     }

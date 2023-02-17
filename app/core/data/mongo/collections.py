@@ -30,20 +30,17 @@ class MessengerToken(dict):
 class WebhookUser(dict):
     GITHUB_ID = 'githubId'
     GITHUB_NAME = 'githubName'
-    RECEIPT_ID = 'receiptId'
     SENDER_ID = 'senderId'
 
     def __init__(
             self,
             github_id: str,
             github_name: str,
-            receipt_id: str,
             sender_id: str
     ):
         super().__init__(
             github_id=github_id,
             github_name=github_name,
-            receipt_id=receipt_id,
             sender_id=sender_id
         )
 
@@ -52,14 +49,12 @@ class PendingWebhook(dict):
     ID = '_id'
     SECRET = 'secret'
     SENDER_ID = 'senderId'
-    RECEIPT_ID = 'receiptId'
     CREATED_AT = 'createdAt'
 
     def __init__(
             self,
             secret: str,
             sender_id: str,
-            receipt_id: str,
             id_: Optional[UUID] = uuid4(),
             created_at: Optional[datetime] = utc_now()  # ttl works when date type is utc
     ):
@@ -67,7 +62,6 @@ class PendingWebhook(dict):
             _id=str(id_),
             secret=secret,
             senderId=sender_id,
-            receiptId=receipt_id,
             createdAt=created_at
         )
 

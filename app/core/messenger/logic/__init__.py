@@ -14,7 +14,6 @@ def initialize_pending_hook(message: MessagePayload):
     create_pending_webhook(
         secret=parsed_message['secret'],
         sender_id=parsed_message['sender'],
-        receipt_id=parsed_message['receipt']
     )
 
     send_message(
