@@ -24,9 +24,9 @@ def send_message(
 
 PENDING_MESSAGE = r"ℹ️ HOW TO USE\n\n\n" \
                   r"1️⃣ 해당 Repository > Settings > Webhooks > Add Webhook\n\n" \
-                  r"2️⃣ Payload URL : https://20d5-168-188-234-72.ngrok.io/{webhook_id} \n\n" \
+                  r"2️⃣ Payload URL : \n https://20d5-168-188-234-72.ngrok.io/{webhook_id} \n\n" \
                   r"3️⃣ Content type : application/json \n\n" \
                   r"4️⃣ Secret : {secret} \n\n\n" \
                   r"=========================\n\n" \
-                  r"⛔️ 보안을 위해 Secret을 설정해주세요. ⛔️\n" \
-                  r"⛔️ Content type != json 일 경우 작동하지 않습니다. ⛔️"
+                  r"✅ 보안을 위해 Secret을 설정해주세요.\n" \
+                  r"✅ Content type != json 일 경우 작동하지 않습니다."
