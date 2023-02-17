@@ -19,6 +19,7 @@ def verify_this_endpoint(request: Request):
 
 
 @messenger_router.post('/webhook')
-async def handle_message(message: MessagePayload):
+def handle_message(message: MessagePayload):
+
     initialize_pending_hook(message)
 
