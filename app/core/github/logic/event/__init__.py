@@ -8,7 +8,15 @@ from app.core.github.logic.event.push import handle_push_event
 
 event_handler_dictionary = defaultdict(lambda: handle_none_provide_event)
 
-event_handler_dictionary['ping'] = handle_ping_event
-event_handler_dictionary['push'] = handle_push_event
-event_handler_dictionary['issue'] = handle_issue_event
-event_handler_dictionary['pull_request'] = handle_pull_request_event
+
+class EventType:
+    PING = 'ping'
+    PUSH = 'push'
+    ISSUE = 'issue'
+    PULL_REQUEST = 'pull_request'
+
+
+event_handler_dictionary[EventType.PING] = handle_ping_event
+# event_handler_dictionary[EventType.PUSH] = handle_push_event
+event_handler_dictionary[EventType.ISSUE] = handle_issue_event
+event_handler_dictionary[EventType.PULL_REQUEST] = handle_pull_request_event
