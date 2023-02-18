@@ -16,7 +16,7 @@ class CollectionNames:
 
 
 class MessengerToken(dict):
-    TOKEN = 'token'
+    TOKEN = '_id'
 
     def __init__(
             self,
@@ -46,6 +46,11 @@ class WebhookUser(dict):
 
 
 class Repository(dict):
+
+    ID = 'repositoryId'
+    NAME = 'repositoryName'
+    URL = 'repositoryUrl'
+
     def __init__(
             self,
             repository_url: str,
