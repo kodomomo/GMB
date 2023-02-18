@@ -1,8 +1,12 @@
 from uuid import uuid4
 
-from app.core.data.mongo import get_collection
-from app.core.data.mongo.collections import CollectionNames, PendingWebhook
 from app.util.time import utc_now
+
+from app.core.data.mongo import (
+    get_collection,
+    CollectionNames,
+    PendingWebhook
+)
 
 
 def create_pending_webhook(secret: str, sender_id: str):

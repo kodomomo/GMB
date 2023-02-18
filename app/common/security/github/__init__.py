@@ -3,7 +3,7 @@ from fastapi import Request
 
 from app.common.exception.github import TypeNotJsonException
 from app.common.security.github.webhook import check_security_set, check_security_correct
-from app.core.data.mongo.query import get_pending_webhook
+from app.core.data.mongo.pending_webhook.query import get_pending_webhook
 
 
 async def check_webhook_valid(bot_id: UUID, request: Request):
