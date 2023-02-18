@@ -13,8 +13,9 @@ def check_security_set(header: Headers):
         else throw(SecurityHeaderNotExistException)
 
 
-def check_security_correct(security: str, security_header: str, payload: dict):
-    security = security.encode()
+def check_security_correct(security: str, security_header: str, payload: bytes):
+    security = security.encode('utf-8')
     signature = new(security, payload, sha256).hexdigest()
 
-    print(compare_digest('sha256=' + signature, security_header))
+    if not compare_digest('sha256=' + signature, security_header):
+        raise IncorrectSecurityException
