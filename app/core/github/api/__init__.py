@@ -2,7 +2,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Request
 
-from app.core.github.logic import check_webhook_valid
+from app.common.security.github import check_webhook_valid
 
 github_webhook_router = APIRouter(
     prefix='/github'
@@ -16,4 +16,3 @@ async def handle_webhook(bot_id: UUID, request: Request):
     # PING, PUSH, PULL_REQUEST
 
     # ELSE
-    
