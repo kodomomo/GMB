@@ -17,3 +17,12 @@ def get_pending_webhook_and_delete(id_: UUID):
     return collection.find_one_and_delete(
         {PendingWebhook.ID: str(id_)}
     )
+
+
+def get_pending_secret(id_: UUID):
+    collection = get_collection(CollectionNames.PENDING_WEBHOOK)
+
+    return collection.find_one(
+        {PendingWebhook.ID: str(id_)},
+        {PendingWebhook.SECRET: 1, PendingWebhook.ID: 0}
+    )[PendingWebhook.SECRET]
