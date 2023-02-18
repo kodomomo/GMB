@@ -10,7 +10,8 @@ from app.core.data.request.messenger import send_message
 async def handle_none_provide_event(bot_id: UUID, event_type: str, request: Request):
     webhook = get_webhook_by_id(bot_id)
 
-    message = webhook[Webhook.REPOSITORY][Repository.NAME] + rf' Repository에서 {event_type} Event가 발생하였습니다.\n\n{webhook[Webhook.REPOSITORY][Repository.URL]}'
+    message = webhook[Webhook.REPOSITORY][Repository.NAME] + rf' Repository에서 {event_type} Event가 발생하였습니다.\n\n' \
+                                                             rf'✅ 바로가기 \n\n {webhook[Webhook.REPOSITORY][Repository.URL]}'
 
     send_message(
         get_page_access_token(),
