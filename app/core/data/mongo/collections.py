@@ -39,9 +39,9 @@ class WebhookUser(dict):
             sender_id: str
     ):
         super().__init__(
-            github_id=github_id,
-            github_name=github_name,
-            sender_id=sender_id
+            githubId=github_id,
+            githubName=github_name,
+            senderId=sender_id
         )
 
 
