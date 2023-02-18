@@ -1,7 +1,7 @@
 from uuid import uuid4
 
-from app.core.data.mongo.command import create_pending_webhook
-from app.core.data.mongo.query import get_page_access_token
+from app.core.data.mongo.pending_webhook.command import create_pending_webhook
+from app.core.data.mongo.token.query import get_page_access_token
 from app.core.messenger.api import MessagePayload
 from app.util.parser.messenger import payload_to_message
 from app.core.data.request.messenger import send_message, PENDING_MESSAGE
