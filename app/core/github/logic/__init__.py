@@ -11,4 +11,4 @@ async def act_by_event_type(bot_id: UUID, request: Request):
 
     handle_function = event_handler_dictionary[event_type]
 
-    await handle_function(bot_id, payload)
+    await handle_function(bot_id, event_type, payload)

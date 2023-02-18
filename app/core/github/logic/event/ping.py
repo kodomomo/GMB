@@ -8,7 +8,7 @@ from app.core.data.request.messenger import send_message
 from app.util.parser.github.ping import parse_ping_event
 
 
-async def handle_ping_event(bot_id: UUID, request: dict):
+async def handle_ping_event(bot_id: UUID, event_type: str, request: dict):
     pending_webhook = get_pending_webhook_and_delete(bot_id)
     parsed_payload = parse_ping_event(request)
 
@@ -32,4 +32,3 @@ async def handle_ping_event(bot_id: UUID, request: dict):
         pending_webhook[PendingWebhook.SENDER_ID],
         parsed_payload['repository_name'] + ' Repository가 정상적으로 등록되었습니다!'
     )
-
