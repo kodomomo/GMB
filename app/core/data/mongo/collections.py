@@ -55,8 +55,8 @@ class PendingWebhook(dict):
             self,
             secret: str,
             sender_id: str,
-            id_: Optional[UUID] = uuid4(),
-            created_at: Optional[datetime] = utc_now()  # ttl works when date type is utc
+            id_: UUID,
+            created_at: datetime# ttl works when date type is utc
     ):
         super().__init__(
             _id=str(id_),
@@ -77,9 +77,9 @@ class Webhook(dict):
             self,
             secret: str,
             user: WebhookUser,
-            id_: Optional[UUID] = uuid4(),
-            event_amt: Optional[int] = 0,
-            created_at: Optional[datetime] = ktc_now(),
+            id_: UUID,
+            created_at: datetime,
+            event_amt: Optional[int] = 0
     ):
         super().__init__(
             _id=str(id_),
