@@ -12,6 +12,6 @@ def get_page_access_token():
 
 def get_pending_webhook(id_: UUID):
     collection = get_collection(CollectionNames.PENDING_WEBHOOK) # TODO
-    return collection.find(
+    return collection.find_one(
         {'_id': str(id_)},
     )
