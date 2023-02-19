@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from app.core.data.mongo import get_collection
+from app.core.data.mongo import get_collection, Select
 from app.core.data.mongo.collections import CollectionNames, PendingWebhook
 
 
@@ -24,5 +24,5 @@ def get_pending_secret(id_: UUID):
 
     return collection.find_one(
         {PendingWebhook.ID: str(id_)},
-        {PendingWebhook.SECRET: 1, PendingWebhook.ID: 0}
+        {PendingWebhook.SECRET: Select.TRUE, PendingWebhook.ID: Select.FALSE}
     )[PendingWebhook.SECRET]

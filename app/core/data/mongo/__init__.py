@@ -12,6 +12,11 @@ from app.config.mongo import MONGO_HOST, MONGO_PORT, MONGO_DATABASE
 from app.core.data.mongo.collections import CollectionNames, PendingWebhook
 
 
+class Select:
+    TRUE = 1
+    FALSE = 0
+
+
 def get_mongo_db(host: str, port: int, database: str) -> Database:
     mongodb = MongoClient(
         host=host,
