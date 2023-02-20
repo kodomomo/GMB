@@ -23,6 +23,7 @@ def initialize_pending_hook(message: MessagePayload):
         page_access_token=page_access_token,
         message_text=PENDING_MESSAGE.format(
             base_url=BASE_URL,
+            secret=parsed_message['secret'],
             id_=id_,
         ),
         recipient_id=parsed_message['sender']

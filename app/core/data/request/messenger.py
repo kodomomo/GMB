@@ -23,6 +23,8 @@ def send_message(
 
 
 PENDING_MESSAGE = r"✅ How to use\n\n" \
-                  r"    · https://github.com/Kodomomo/GMB\n\n\n\n" \
+                  r"    · https://github.com/Kodomomo/GMB\n\n\n" \
+                  r"✅ Secret\n\n" \
+                  r"    · {secret}\n\n\n" \
                   r"✅ Redirect URL\n\n" \
                   r"    · {base_url}/github/webhook/{id_}"
