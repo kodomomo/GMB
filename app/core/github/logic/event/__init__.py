@@ -12,7 +12,7 @@ event_handler_dictionary = defaultdict(lambda: handle_none_provide_event)
 class EventType:
     PING = 'ping'
     PUSH = 'push'
-    ISSUE = 'issue'
+    ISSUE = 'issues'
     PULL_REQUEST = 'pull_request'
 
 
