@@ -26,3 +26,15 @@ def create_webhook(
             amt=amt
         )
     )
+
+
+def update_amt(
+        id_: UUID,
+        amt_type: str
+):
+    collection = get_collection(CollectionNames.WEBHOOK)
+
+    collection.update_one(
+        {Webhook.ID: str(id_)},
+        {'$inc': {amt_type: 1}}
+    )
