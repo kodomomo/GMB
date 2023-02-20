@@ -9,7 +9,8 @@ from app.common.exception import throw
 from app.common.exception.mongodb import DatabaseNotFoundException
 
 from app.config.mongo import MONGO_HOST, MONGO_PORT, MONGO_DATABASE
-from app.core.data.mongo.collections import CollectionNames, PendingWebhook
+from app.core.data.mongo.collections import CollectionNames
+from app.core.data.mongo.pending_webhook import PendingWebhook
 
 
 class Select:

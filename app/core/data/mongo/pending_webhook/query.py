@@ -1,7 +1,8 @@
 from uuid import UUID
 
 from app.core.data.mongo import get_collection, Select
-from app.core.data.mongo.collections import CollectionNames, PendingWebhook
+from app.core.data.mongo.collections import CollectionNames
+from app.core.data.mongo.pending_webhook import PendingWebhook
 
 
 def get_pending_webhook(id_: UUID):

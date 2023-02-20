@@ -1,6 +1,7 @@
 from uuid import UUID
 
-from app.core.data.mongo.collections import WebhookUser, Repository, PendingWebhook
+from app.core.data.mongo.webhook import User, Repository
+from app.core.data.mongo.pending_webhook import PendingWebhook
 from app.core.data.mongo.pending_webhook.query import get_pending_webhook_and_delete
 from app.core.data.mongo.token.query import get_page_access_token
 from app.core.data.mongo.webhook.command import create_webhook
@@ -15,7 +16,7 @@ async def handle_ping_event(bot_id: UUID, event_type: str, request: dict):
     create_webhook(
         id_=pending_webhook[PendingWebhook.ID],
         secret=pending_webhook[PendingWebhook.SECRET],
-        user=WebhookUser(
+        user=User(
             sender_id=pending_webhook[PendingWebhook.SENDER_ID],
             github_id=parsed_payload['github_id'],
             github_name=parsed_payload['github_name']

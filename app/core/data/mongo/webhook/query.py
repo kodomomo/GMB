@@ -1,7 +1,7 @@
 from uuid import UUID
 
 from app.core.data.mongo import CollectionNames, get_collection, Select
-from app.core.data.mongo.collections import Webhook
+from app.core.data.mongo.webhook import Webhook
 
 
 def get_webhook_by_id(id_: UUID):
