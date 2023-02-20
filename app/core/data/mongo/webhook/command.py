@@ -1,8 +1,9 @@
+from typing import Optional
 from uuid import UUID
 
 from app.core.data.mongo import get_collection
 from app.core.data.mongo.collections import CollectionNames
-from app.core.data.mongo.webhook import Webhook, User, Repository
+from app.core.data.mongo.webhook import Webhook, User, Repository, Amt
 from app.util.time import ktc_now
 
 
@@ -11,6 +12,7 @@ def create_webhook(
         secret: str,
         user: User,
         repository: Repository,
+        amt: Optional[Amt] = Amt(0, 0, 0, 0)
 ):
     collection = get_collection(CollectionNames.WEBHOOK)
 
@@ -21,6 +23,6 @@ def create_webhook(
             created_at=ktc_now(),
             user=user,
             repository=repository,
-            event_amt=0,
+            amt=amt
         )
     )

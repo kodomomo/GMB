@@ -39,7 +39,7 @@ class Repository(dict):
         )
 
 
-class Amt:
+class Amt(dict):
     PUSH = 'push'
     ISSUE = 'issue'
     PULL_REQUEST = 'pullRequest'
@@ -88,16 +88,16 @@ class Webhook(dict):
             self,
             id_: UUID,
             secret: str,
+            amt: Amt,
             user: User,
             repository: Repository,
             created_at: datetime,
-            event_amt: Optional[int] = 0,
     ):
         super().__init__(
             _id=str(id_),
             secret=secret,
             createdAt=created_at,
             user=user,
-            eventAmt=event_amt,
+            amt=amt,
             repository=repository
         )
