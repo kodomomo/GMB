@@ -1,9 +1,7 @@
 from uuid import UUID
-from datetime import datetime
 
 from app.core.data.mongo import get_collection
 from app.core.data.mongo.collections import CollectionNames
-from app.core.data.mongo.pending_webhook import PendingWebhook
 from app.core.data.mongo.webhook import Webhook, User, Repository
 from app.util.time import ktc_now
 

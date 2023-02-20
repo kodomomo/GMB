@@ -1,6 +1,6 @@
 from requests import get
 
-from app.config.messenger import APP_ID, APP_SECRET, REDIRECT_URI, STATE, PAGE_ID
+from app.config.messenger import APP_ID, APP_SECRET, REDIRECT_URI, STATE
 
 
 def get_url():

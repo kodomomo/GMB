@@ -1,5 +1,4 @@
 from uuid import UUID
-from fastapi import Request
 
 from app.core.data.mongo.webhook import Webhook, User, Repository
 from app.core.data.mongo.token.query import get_page_access_token
