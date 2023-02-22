@@ -26,7 +26,7 @@ def get_mongo_db(host: str, port: int, database: str) -> Database:
         tz_aware=False
     ).get_database(database)
 
-    return mongodb if len(mongodb.list_collection_names()) != 0 else throw(DatabaseNotFoundException)
+    return mongodb # if len(mongodb.list_collection_names()) != 0 else throw(DatabaseNotFoundException)
 
 
 def get_collection(collection_name: str) -> Collection:
