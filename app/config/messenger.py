@@ -1,6 +1,6 @@
-from os import environ
+import os
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 
-MESSENGER_WEBHOOK_VERIFY_TOKEN = environ['MESSENGER_WEBHOOK_VERIFY_TOKEN']
+MESSENGER_WEBHOOK_VERIFY_TOKEN = os.environ['MESSENGER_WEBHOOK_VERIFY_TOKEN']
