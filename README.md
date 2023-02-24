@@ -23,7 +23,7 @@ https://user-images.githubusercontent.com/80697064/220069455-f883db99-2069-4205-
   - `Content Type` :: application/json 선택
   - `Secret` :: 전달 받은 Secret
 
-7. 전달 받은 Event 선택
+7. 전달 받을 Event 선택
 8. Active 활성화
 
 ----
