@@ -1,15 +1,24 @@
 from uuid import UUID
 
+from app.common.exception import throw
+from app.common.exception.webhook import WebhookNotFoundException
 from app.core.data.mongo import get_collection, Select
 from app.core.data.mongo.collections import CollectionNames
 from app.core.data.mongo.pending_webhook import PendingWebhook
 
 
 def get_pending_webhook(id_: UUID):
-    collection = get_collection(CollectionNames.PENDING_WEBHOOK) # TODO
-    return collection.find_one(
-        {PendingWebhook.ID: str(id_)},
-    )
+    collection = get_collection(CollectionNames.PENDING_WEBHOOK)  # TODO
+    return v \
+        if \
+        (
+            v := collection.find_one(
+                {
+                    PendingWebhook.ID: str(id_)
+                }
+            )
+        ) is not None \
+        else throw(WebhookNotFoundException('PENDING WEBHOOK NOT FOUND'))
 
 
 def get_pending_webhook_and_delete(id_: UUID):
