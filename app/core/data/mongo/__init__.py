@@ -8,7 +8,7 @@ from pymongo.errors import CollectionInvalid
 from app.common.exception import throw
 from app.common.exception.mongodb import DatabaseNotFoundException
 
-from app.config.mongo import MONGO_HOST, MONGO_PORT, MONGO_DATABASE
+from app.config.mongo import MONGO_HOST, MONGO_PORT, MONGO_DATABASE, MONGO_USER_NAME, MONGO_PASSWORD
 from app.core.data.mongo.collections import CollectionNames
 from app.core.data.mongo.pending_webhook import PendingWebhook
 
@@ -18,15 +18,14 @@ class Select:
     FALSE = 0
 
 
-def get_mongo_db(host: str, port: int, database: str) -> Database:
+def get_mongo_db(user_name: str, password: str, host: str, port: int, database: str) -> Database:
     mongodb = MongoClient(
-        host=host,
-        port=port,
+        f'mongodb://{user_name}:{password}@{host}:{port}',
         document_class=dict,
         tz_aware=False
     ).get_database(database)
 
-    return mongodb # if len(mongodb.list_collection_names()) != 0 else throw(DatabaseNotFoundException)
+    return mongodb
 
 
 def get_collection(collection_name: str) -> Collection:
@@ -62,5 +61,5 @@ def init_mongo():
 
 
 mongo = get_mongo_db(
-    MONGO_HOST, MONGO_PORT, MONGO_DATABASE
+    MONGO_USER_NAME, MONGO_PASSWORD, MONGO_HOST, MONGO_PORT, MONGO_DATABASE
 )

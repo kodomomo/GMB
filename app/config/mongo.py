@@ -3,6 +3,8 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 
+MONGO_USER_NAME = os.environ['MONGO_USER_NAME']
+MONGO_PASSWORD = os.environ['MOGNO_PASSWORD']
 MONGO_HOST = os.environ['MONGO_HOST']
 MONGO_PORT = int(os.environ['MONGO_PORT'])
 MONGO_DATABASE = os.environ['MONGO_DATABASE']
