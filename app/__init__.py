@@ -16,3 +16,7 @@ def create_app():
     include_messenger_router(app)
 
     return app
+
+# TODO
+# 1. Model Class에서 @Property 변수로 접근 가능하게 해주기
+# 2. query에서 find 함수들 return 값 Decorator를 통해서 Model로 바꿔주기
