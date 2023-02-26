@@ -3,10 +3,6 @@ from typing import List
 from pymongo import MongoClient, ASCENDING
 from pymongo.database import Database, Collection
 from pymongo.errors import CollectionInvalid
-# from pymongo.typings import _DocumentType as DocumentType
-
-from app.common.exception import throw
-from app.common.exception.mongodb import DatabaseNotFoundException
 
 from app.config.mongo import MONGO_HOST, MONGO_PORT, MONGO_DATABASE, MONGO_USER_NAME, MONGO_PASSWORD
 from app.core.data.mongo.collections import CollectionNames
