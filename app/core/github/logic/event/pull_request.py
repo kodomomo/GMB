@@ -1,6 +1,5 @@
 from uuid import UUID
 
-from app.core.data.mongo.token.query import get_page_access_token
 from app.core.data.mongo.webhook import Webhook, User
 from app.core.data.mongo.webhook.command import update_amt
 from app.core.data.mongo.webhook.query import get_webhook_by_id
@@ -19,7 +18,6 @@ async def handle_pull_request_event(bot_id: UUID, event_type: str, request: dict
                                                  rf'🔥 {parsed_pr["url"]}'
 
         send_message(
-            get_page_access_token(),
             webhook[Webhook.USER][User.SENDER_ID],
             message
         )

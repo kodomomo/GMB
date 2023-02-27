@@ -1,10 +1,12 @@
 from requests import post
 
+from app.config.messenger import PAGE_ACCESS_TOKEN
+
 
 def send_message(
-        page_access_token: str,
         recipient_id: str,
         message_text: str,
+        page_access_token: str = PAGE_ACCESS_TOKEN,
         message_type: str = "MESSAGE_TAG",
         tag: str = "CONFIRMED_EVENT_UPDATE"
 ):
