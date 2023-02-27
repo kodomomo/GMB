@@ -5,4 +5,4 @@ class CollectionNames:
     WEBHOOK = 'webhook'
     REPOSITORY = 'repository'
 
-    NAME_LIST = [TOKEN, WEBHOOK, PENDING_WEBHOOK]
+    NAME_LIST = [WEBHOOK, PENDING_WEBHOOK]
