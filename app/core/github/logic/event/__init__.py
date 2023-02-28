@@ -20,3 +20,6 @@ event_handler_dictionary[EventType.PING] = handle_ping_event
 event_handler_dictionary[EventType.PUSH] = handle_push_event
 event_handler_dictionary[EventType.ISSUE] = handle_issue_event
 event_handler_dictionary[EventType.PULL_REQUEST] = handle_pull_request_event
+
+
+#  TODO 여기도 lambda로 변경
