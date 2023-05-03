@@ -3,7 +3,7 @@ from uuid import uuid4
 from app.config import BASE_URL
 from app.util.parser.messenger import Message
 from app.core.data.mongo.pending_webhook.command import create_pending_webhook
-from app.core.data.request.messenger import send_message, PENDING_MESSAGE
+from app.util.request.messenger import send_message, PENDING_MESSAGE
 
 
 def initialize_pending_hook(message: Message):

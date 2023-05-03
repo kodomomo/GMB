@@ -1,4 +1,4 @@
-from app.core.data.request.messenger import send_message
+from app.util.request.messenger import send_message
 from app.util.parser.messenger import Message
 
 

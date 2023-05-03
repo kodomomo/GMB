@@ -3,7 +3,7 @@ from uuid import UUID
 from app.core.data.mongo.webhook import Webhook, User
 from app.core.data.mongo.webhook.command import update_amt
 from app.core.data.mongo.webhook.query import get_webhook_by_id
-from app.core.data.request.messenger import send_message
+from app.util.request.messenger import send_message
 from app.util.parser.github.issue import parse_issue, get_type
 
 

@@ -4,7 +4,7 @@ from app.core.data.mongo.webhook import User, Repository
 from app.core.data.mongo.pending_webhook import PendingWebhook
 from app.core.data.mongo.pending_webhook.query import get_pending_webhook_and_delete
 from app.core.data.mongo.webhook.command import create_webhook
-from app.core.data.request.messenger import send_message
+from app.util.request.messenger import send_message
 from app.util.parser.github.ping import parse_ping_event
 
 
