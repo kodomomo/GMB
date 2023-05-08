@@ -11,9 +11,9 @@ nums = list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
 
 def generate_random_secret():
     secret = ''
-    _kr_key = random.choice(english)
+    _en_key = random.choice(english)
     for _ in range(2): secret += random.choice(nums)
-    secret += _kr_key
+    secret += _en_key
     for _ in range(3): secret += random.choice(nums)
 
     return secret
