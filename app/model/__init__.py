@@ -4,7 +4,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from app.model.webhook.webhook import Webhook
 from app.model.pending_webhook import PendingWebhook
 
-from app.config.mongo import MongoConfig
+from app.config import MongoConfig
 
 
 async def init_mongodb():
