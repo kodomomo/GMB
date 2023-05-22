@@ -19,6 +19,6 @@ class MongoConfig:
     MONGO_URL = f'mongodb://{_MONGO_ROOT_NAME}:{_MONGO_ROOT_PASSWORD}@{_MONGO_HOST}:{_MONGO_PORT}'
 
 
-class Messenger:
+class MessengerConfig:
     PAGE_ACCESS_TOKEN = os.environ['PAGE_ACCESS_TOKEN']
     MESSENGER_WEBHOOK_VERIFY_TOKEN = os.environ['MESSENGER_WEBHOOK_VERIFY_TOKEN']
