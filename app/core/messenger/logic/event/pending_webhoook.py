@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from app.config import BASE_URL
+from app.config import GMBConfig
 from app.util.parser.messenger import Message
 from app.core.data.mongo.pending_webhook.command import create_pending_webhook
 from app.util.request.messenger import send_message, PENDING_MESSAGE
@@ -17,7 +17,7 @@ def initialize_pending_hook(message: Message):
 
     send_message(
         message_text=PENDING_MESSAGE.format(
-            base_url=BASE_URL,
+            base_url=GMBConfig.BASE_URL,
             secret=message.content,
             id_=id_,
         ),
